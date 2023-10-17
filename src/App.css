@@ -28,3 +28,11 @@
     transform: rotate(360deg);
   }
 }
+
+.filter-button button:hover {
+  border-color: rgba(29, 223, 213, 0.2);
+}
+
+.filter-button button:focus {
+  border-color: rgba(185, 223, 17, 0.3);
+}

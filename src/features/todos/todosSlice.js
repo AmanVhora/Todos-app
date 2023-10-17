@@ -1,7 +1,15 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 
+export const filters = {
+  all: 'All',
+  completed: 'Completed',
+  active: 'Active'
+}
+
 const todosAdapter = createEntityAdapter()
-const initialState = todosAdapter.getInitialState()
+const initialState = todosAdapter.getInitialState({
+  status: filters.all
+})
 
 export const todosSlice = createSlice({
   name: 'todos',
@@ -21,10 +29,13 @@ export const todosSlice = createSlice({
       const completedTodoIds = Object.values(state.entities).filter(todo => todo.isCompleted === true).map(todo => todo.id)
       todosAdapter.removeMany(state, completedTodoIds)
     },
+    filterTodos(state, action) {
+      state.status = action.payload
+    },
   }
 })
 
-export const { addedTodo, deletedTodo, toggleIsCompletedTodo, markAllCompletedTodos, clearCompletedTodos } = todosSlice.actions
+export const { addedTodo, deletedTodo, toggleIsCompletedTodo, markAllCompletedTodos, clearCompletedTodos, filterTodos } = todosSlice.actions
 
 export default todosSlice.reducer 
 
