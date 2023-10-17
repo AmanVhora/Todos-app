@@ -13,7 +13,8 @@ export const AddTodoForm = () => {
       dispatch(
         addedTodo({
           id: nanoid(),
-          todoDescription
+          todoDescription,
+          isCompleted: false,
         })
       )
       setTodoDescription('')
@@ -34,6 +35,7 @@ export const AddTodoForm = () => {
               name="todoDescription"
               value={todoDescription}
               onChange={onTodoChanged}
+              placeholder="What you want to do?"
             />     
             <button className="btn btn-primary mt-2" type="button" onClick={onAddTodoClicked} disabled={!todoDescription}>Add Todo</button>
           </div>

@@ -9,10 +9,15 @@ export const todosSlice = createSlice({
   reducers: {
     addedTodo: todosAdapter.addOne,
     deletedTodo: todosAdapter.removeOne,
+    toggleIsCompletedTodo(state, action) {
+      const { todoId, isCompleted } = action.payload
+      const todo = state.entities[todoId]
+      todo.isCompleted = !isCompleted
+    },
   }
 })
 
-export const { addedTodo, deletedTodo } = todosSlice.actions
+export const { addedTodo, deletedTodo, toggleIsCompletedTodo } = todosSlice.actions
 
 export default todosSlice.reducer 
 

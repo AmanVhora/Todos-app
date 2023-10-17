@@ -5,7 +5,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-import { TodosList } from './features/todosList';
+import { TodosList } from './features/todos/todosList';
 
 function App() {
   return (
