@@ -14,10 +14,17 @@ export const todosSlice = createSlice({
       const todo = state.entities[todoId]
       todo.isCompleted = !isCompleted
     },
+    markAllCompletedTodos(state, action) {
+      Object.values(state.entities).forEach(todo => todo.isCompleted = true)
+    },
+    clearCompletedTodos(state, action) {
+      const completedTodoIds = Object.values(state.entities).filter(todo => todo.isCompleted === true).map(todo => todo.id)
+      todosAdapter.removeMany(state, completedTodoIds)
+    },
   }
 })
 
-export const { addedTodo, deletedTodo, toggleIsCompletedTodo } = todosSlice.actions
+export const { addedTodo, deletedTodo, toggleIsCompletedTodo, markAllCompletedTodos, clearCompletedTodos } = todosSlice.actions
 
 export default todosSlice.reducer 
 
