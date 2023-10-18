@@ -15,6 +15,7 @@ export const AddTodoForm = () => {
           id: nanoid(),
           todoDescription,
           isCompleted: false,
+          color: '',
         })
       )
       setTodoDescription('')
@@ -27,7 +28,7 @@ export const AddTodoForm = () => {
         <fieldset className="border rounded-2 px-3 pb-3">
           <legend className="float-none w-auto px-2">Add Todo:</legend>
           <div>
-            <label htmlFor="todoDescription" className="form-label">Description</label>
+            <label htmlFor="todoDescription" className="form-label fs-3">Description</label>
             <input
               className="form-control"
               id="todoDescription"

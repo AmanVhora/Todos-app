@@ -6,6 +6,8 @@ export const filters = {
   active: 'Active'
 }
 
+export const colorFilters = ['Blue', 'Green', 'Red', 'Orange', 'Purple']
+
 const todosAdapter = createEntityAdapter()
 const initialState = todosAdapter.getInitialState({
   status: filters.all
@@ -32,13 +34,24 @@ export const todosSlice = createSlice({
     filterTodos(state, action) {
       state.status = action.payload
     },
+    setTodoColor(state, action) {
+      const { todoId, color } = action.payload
+      const todo = state.entities[todoId]
+      todo.color = color
+    },
+    filterTodosByColor(state, action) {
+      const color = action.payload
+      const coloredTodoIds = Object.values(state.entities).filter(todo => todo.color === color).map(todo => todo.id)
+      console.log(coloredTodoIds);
+    },
   }
 })
 
-export const { addedTodo, deletedTodo, toggleIsCompletedTodo, markAllCompletedTodos, clearCompletedTodos, filterTodos } = todosSlice.actions
+export const { addedTodo, deletedTodo, toggleIsCompletedTodo, markAllCompletedTodos, clearCompletedTodos, filterTodos, setTodoColor, filterTodosByColor } = todosSlice.actions
 
 export default todosSlice.reducer 
 
 export const {
   selectAll: selectAllTodos,
+  selectById: selectTodoById,
 } = todosAdapter.getSelectors(state => state.todos)

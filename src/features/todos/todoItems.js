@@ -1,4 +1,4 @@
-import { deletedTodo, filters, selectAllTodos, toggleIsCompletedTodo } from "./todosSlice";
+import { colorFilters, deletedTodo, filters, selectAllTodos, setTodoColor, toggleIsCompletedTodo } from "./todosSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const TodoItems = () => {
@@ -16,15 +16,28 @@ export const TodoItems = () => {
     }
   }
 
+  const handleColorChanged = (todoId) => (e) => {
+    const color = e.target.value
+    dispatch(setTodoColor({ todoId: todoId, color: color }))
+  }
+
+  const colorOptions = colorFilters.map(color => (
+    <option key={color} value={color} style={{color: color}}>{color}</option>
+  ))
+  
   const renderedTodos = filteredTodo().map(todo => (
-    <li key={todo.id} className="mb-3" style={{listStyle: 'none'}}>
+    <li key={todo.id} className="mb-3 fs-5" style={{listStyle: 'none'}}>
       <div className="d-flex justify-content-between">
-        <div className="d-flex w-75 fs-5 my-auto">
+        <div className="d-flex w-75 my-auto">
           <input className="form-check-input" type="checkbox" value="" checked={todo.isCompleted} onChange={() => dispatch(toggleIsCompletedTodo({todoId: todo.id, isCompleted: todo.isCompleted}))} />
           <p key={todo.id} className="ms-3 my-0" style={{wordWrap: 'break-word'}}>{todo.todoDescription}</p>
         </div>
-        <div>
-          <button className="btn btn-danger" type="button" onClick={() => dispatch(deletedTodo(todo.id))}>Delete Todo</button>
+        <div className="d-flex my-auto">
+          <select className="form-select" style={{color: todo.color}} onChange={handleColorChanged(todo.id)}>
+            <option value=""></option>
+            {colorOptions}
+          </select>
+          <button className="btn btn-danger ms-3 w-75" type="button" onClick={() => dispatch(deletedTodo(todo.id))}>Delete</button>
         </div>
       </div>
     </li>
