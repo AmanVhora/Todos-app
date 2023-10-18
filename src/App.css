@@ -28,6 +28,10 @@
   }
 }
 
+.action button:hover {
+  border-color: rgba(29, 223, 213, 0.2);
+}
+
 .filter-button button:hover {
   border-color: rgba(29, 223, 213, 0.2);
 }

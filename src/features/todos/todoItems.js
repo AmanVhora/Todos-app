@@ -4,13 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 export const TodoItems = () => {
   const todos = useSelector(selectAllTodos)
   const filter = useSelector(state => state.todos.status)
+  const colors = useSelector(state => state.todos.colors)
   const dispatch = useDispatch()
   
   const filteredTodo = () => {
-    if (filter === filters.completed) {
+    if (filter === filters.completed && colors.length === 0) {
       return todos.filter(todo => todo.isCompleted)
-    } else if (filter === filters.active) {
+    } else if (filter === filters.completed && colors.length > 0) {
+      return todos.filter(todo => todo.isCompleted && colors.includes(todo.color))
+    } else if (filter === filters.active && colors.length === 0) {
       return todos.filter(todo => !todo.isCompleted)
+    } else if (filter === filters.active && colors.length > 0) {
+      return todos.filter(todo => !todo.isCompleted && colors.includes(todo.color))
+    } else if (colors.length > 0){
+      return todos.filter(todo => colors.includes(todo.color))
     } else {
       return todos
     }
@@ -33,7 +40,7 @@ export const TodoItems = () => {
           <p key={todo.id} className="ms-3 my-0" style={{wordWrap: 'break-word'}}>{todo.todoDescription}</p>
         </div>
         <div className="d-flex my-auto">
-          <select className="form-select" style={{color: todo.color}} onChange={handleColorChanged(todo.id)}>
+          <select className="form-select" style={{color: todo.color}} onChange={handleColorChanged(todo.id)} value={todo.color}>
             <option value=""></option>
             {colorOptions}
           </select>

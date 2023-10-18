@@ -27,8 +27,7 @@ export const AddTodoForm = () => {
       <form>
         <fieldset className="border rounded-2 px-3 pb-3">
           <legend className="float-none w-auto px-2">Add Todo:</legend>
-          <div>
-            <label htmlFor="todoDescription" className="form-label fs-3">Description</label>
+          <div className="d-flex">
             <input
               className="form-control"
               id="todoDescription"
@@ -38,7 +37,7 @@ export const AddTodoForm = () => {
               onChange={onTodoChanged}
               placeholder="What you want to do?"
             />     
-            <button className="btn btn-primary mt-2" type="button" onClick={onAddTodoClicked} disabled={!todoDescription}>Add Todo</button>
+            <button className="btn btn-primary ms-3" type="submit" onClick={onAddTodoClicked} disabled={!todoDescription}>Add</button>
           </div>
         </fieldset>
       </form>

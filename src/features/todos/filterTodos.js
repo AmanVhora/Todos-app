@@ -18,10 +18,10 @@ export const FilterTodos = () => {
       <div className="d-flex justify-content-between mb-2">
         <div>
           <p className="fs-5 mx-3 my-2" style={{color: '#b5cde5'}}>Actions</p>
-          <div className="filter-button">
+          <div className="action">
             <button className="btn text-light border-2" onClick={() => dispatch(markAllCompletedTodos())}>Mark as all completed</button>
           </div>
-          <div className="filter-button">
+          <div className="action">
             <button className="btn text-light border-2" onClick={() => dispatch(clearCompletedTodos())}>Clear completed</button>
           </div>
         </div>
